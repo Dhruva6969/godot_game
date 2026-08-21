@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://qpq1lhuwca87"]
+
+[ext_resource type="Texture2D" uid="uid://ci1rhymbgfh44" path="res://assets/sprites/slime_green.png" id="1_5jc4t"]
+[ext_resource type="Script" uid="uid://ca6tnxj45vqvj" path="res://scripts/slime.gd" id="1_pjw23"]
+[ext_resource type="PackedScene" uid="uid://djyxtgukm55jv" path="res://scenes/killzone.tscn" id="2_4l1t8"]
+[ext_resource type="Script" uid="uid://8t522i30hty2" path="res://scripts/animated_sprite_2d.gd" id="2_n6pvg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppcr1"]
+atlas = ExtResource("1_5jc4t")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jayke"]
+atlas = ExtResource("1_5jc4t")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2002g"]
+atlas = ExtResource("1_5jc4t")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bratd"]
+atlas = ExtResource("1_5jc4t")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vq4g1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppcr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jayke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2002g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bratd")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scas6"]
+size = Vector2(8, 12)
+
+[node name="Slime" type="Node2D" unique_id=1219857091]
+script = ExtResource("1_pjw23")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=87105059]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_vq4g1")
+autoplay = "default"
+script = ExtResource("2_n6pvg")
+
+[node name="Killzone" parent="." unique_id=1835973432 instance=ExtResource("2_4l1t8")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=644224666]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_scas6")
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=628345816]
+position = Vector2(0, -6)
+target_position = Vector2(9, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1793224220]
+position = Vector2(0, -6)
+target_position = Vector2(-9, 0)
